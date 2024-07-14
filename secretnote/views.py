@@ -31,7 +31,7 @@ def createNote(request):
         if ( isDone):
             note = Note(note_text = text, note_remvisit = maxVisit, expiry_date = datetime.strptime(expireDate, '%Y-%m-%d').date())
             note.save()
-            link = request.build_absolute_uri(f"/secretnote/{str(note.note_url)}/")
+            link = request.build_absolute_uri(f"/secretnote/{str(note.note_url)}")
             return render(request, "secretnote/noteView.html",{"note": note, "link":link})
     return render(request, "secretnote/index.html",{"msg":msg})
 
@@ -43,6 +43,6 @@ def retrieveNote(request, id):
     if (note.note_remvisit<=0 or timezone.now() >= note.expiry_date):
         note.delete()
         return render(request, "secretnote/index.html",{"msg":["note is expired or not found"]})
-    link = request.build_absolute_uri(f"/secretnote/{str(note.note_url)}/")
+    link = request.build_absolute_uri(f"/secretnote/{str(note.note_url)}")
     return render(request, "secretnote/noteView.html", {"note": note, "link":link})
 

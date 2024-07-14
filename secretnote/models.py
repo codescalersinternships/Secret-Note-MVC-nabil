@@ -11,7 +11,4 @@ class Note(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     expiry_date = models.DateTimeField()
 
-    # def get_queryset(self,args):
-    #     print("hello")
-    #     qs = Note.objects.get(args)
-    #     return qs
+    
